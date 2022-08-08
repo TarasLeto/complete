@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Running build automation'
-                sh './mvnw clean package build --M3'
+                sh './mvnw clean package --M3'
             }
         }
     }
