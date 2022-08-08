@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Running build automation'
-                sh ('./mvnw clean package --user='jenkins')
+                sh './mvn clean package --no daemon'
             }
         }
     }
