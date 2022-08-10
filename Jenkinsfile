@@ -7,7 +7,7 @@ pipeline {
             }
             steps {
                 script {
-                    app= docker.build("gs-rest-service/gs-rest-service")
+                    app= docker.build("tarasleto96/repo-images-test")
                     }
                 }
     }
