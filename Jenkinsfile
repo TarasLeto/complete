@@ -11,7 +11,8 @@ pipeline {
                     }
                 }
     }
-            }    
+            }  
+}
             stage ('Push Docker Image') {
                 when {
                     branch 'main'
