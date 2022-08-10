@@ -18,7 +18,7 @@ pipeline {
                 }
                 steps {
                     script {
-                        docker.withRegistry('https://tarasleto96/repo-images-test:lts', 'docker_hub_login') {
+                        docker.withRegistry('docker_hub_login') {
                             app.push ("${env.BUILD_NUMBER}")
                             app.push(" latest" )
                         }
