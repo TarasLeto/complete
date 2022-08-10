@@ -1,19 +1,18 @@
 pipeline {
     agent any
     stages {
-        stage('Build image') {
+        stage ('Build Docker Image') {
             when {
                 branch 'main'
-            steps {
-                echo 'Starting to build docker image'
-
-                script {
-                    def customImage = docker.build("my-image:${env.BUILD_ID}")
-                }
             }
-        }
+            steps {
+                script {
+                    app= docker.build("tarasleto96/train-schedule")
+                    app.inside {
+                         sh 'echo $(curl localhost:8080)'
+                    }
+                }
     }
-}
             }    
             stage ('Push Docker Image') {
                 when {
@@ -22,10 +21,11 @@ pipeline {
                 steps {
                     script {
                         docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                            customImage.push ("${env.BUILD_ID}")
-                            customImage.push(" latest" )
+                            app.push ("${env.BUILD_NUMBER}")
+                            app.push(" latest" )
                         }
                     }
                 }
             }
-
+    }
+}
