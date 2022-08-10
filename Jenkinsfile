@@ -7,9 +7,7 @@ pipeline {
             }
             steps {
                 script {
-                    app= docker.build("tarasleto96/train-schedule")
-                    app.inside {
-                         sh 'echo $(curl localhost:8080)'
+                    app= docker.build("gs-rest-service/gs-rest-service")
                     }
                 }
     }
