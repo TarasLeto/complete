@@ -7,3 +7,5 @@ pipeline {
                 sh './mvnw clean package build --M3'
             }
         }
+    }
+}
