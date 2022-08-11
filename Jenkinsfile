@@ -7,7 +7,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImage = docker.build("tarasleto96/repo-images-test")+ "$BUILD_NUMBER"
+                    dockerImage = docker.build("tarasleto96/repo-images-test")+ ":$BUILD_NUMBER"
                     }
                 }
     }
