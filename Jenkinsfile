@@ -1,6 +1,6 @@
 pipeline {
     environment { 
-        registry = "tarasleto96/gs_rest-service" 
+        registry = "tarasleto96/gs-rest_service" 
         registryCredential = 'docker_hub_login' 
         dockerImage = '' 
     }
@@ -24,7 +24,7 @@ pipeline {
                 steps {
                     script {
                         docker.withRegistry('', registryCredential) {
-                            dockerImage.push()
+                            dockerImage.push("lts")
                         }
                     }
                 }
