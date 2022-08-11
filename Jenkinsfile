@@ -1,6 +1,6 @@
 pipeline {
     environment { 
-        registry = "tarasleto96/gs-rest_service" 
+        registry = "tarasleto96/gs_rest-service" 
         registryCredential = 'docker_hub_login' 
         dockerImage = '' 
     }
