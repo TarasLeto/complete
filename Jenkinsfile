@@ -18,7 +18,7 @@ pipeline {
                 }
                 steps {
                     script {
-                        docker.withRegistry('', 'docker_hub_login') {
+                        docker.withRegistry('', docker_hub_login) {
                             dockerImage.push ("${env.BUILD_NUMBER}")
                             dockerImage.push(" latest" )
                         }
