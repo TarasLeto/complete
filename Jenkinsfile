@@ -1,19 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
-                echo 'Running build automation'
-                sh './gradlew build --no-daemon'
-            }
-        }
         stage ('Build Docker Image') {
             when {
                 branch 'main'
             }
             steps {
                 script {
-                    app= docker.build("tarasleto96/repo-images-test")
+                    dockerImage = docker.build("tarasleto96/repo-images-test")+ "$BUILD_NUMBER"
                     }
                 }
     }
@@ -24,9 +18,9 @@ pipeline {
                 }
                 steps {
                     script {
-                        docker.withRegistry('','docker_hub_login') {
-                            app.push ("${env.BUILD_NUMBER}")
-                            app.push(" latest" )
+                        docker.withRegistry('', docker_hub_login) {
+                            DockerImage.push ("${env.BUILD_NUMBER}")
+                            DockerImage.push(" latest" )
                         }
                     }
                 }
