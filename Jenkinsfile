@@ -1,4 +1,9 @@
 pipeline {
+    environment { 
+        registry = "tarasleto96/repo-images-test" 
+        registryCredential = 'docker_hub_login' 
+        dockerImage = '' 
+    }
     agent any
     stages {
         stage ('Build Docker Image') {
@@ -7,7 +12,7 @@ pipeline {
             }
             steps {
                 script {
-                    dockerImage = docker.build("tarasleto96/repo-images-test")+ ":$BUILD_NUMBER"
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     }
                 }
     }
@@ -18,8 +23,7 @@ pipeline {
                 }
                 steps {
                     script {
-                        docker.withRegistry('', docker_hub_login) {
-                            dockerImage.push ("${env.BUILD_NUMBER}")
+                        docker.withRegistry('', registryCredential) {
                             dockerImage.push(" latest" )
                         }
                     }
